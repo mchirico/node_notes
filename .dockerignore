@@ -1,0 +1,9 @@
+node_modules
+build
+.git*
+test-fixtures/*.json
+.idea
+Makefile
+Notes
+*.md
+Dockerfile
