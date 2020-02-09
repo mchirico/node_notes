@@ -36,14 +36,15 @@ describe("Testing Utils", () => {
 
   it("Get URLs", () => {
     getURLs("data/stations.csv", data => {
-      console.log("okay....");
+      console.log("okay....")
       //console.log(data);
     });
   });
 
   it("Get URLs", () => {
     surburban(data => {
-      assert.equal(data.north[0].direction, "N");
+      assert.equal(data.north[0].direction,'N')
+
     });
   });
 });
