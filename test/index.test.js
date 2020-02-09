@@ -1,10 +1,15 @@
 const { assert, expect } = require("chai");
 const { SuburbanStation } = require("../test_fixtures/testData");
-const { septaExtract, sayHello, 
-    stations, writeStations, getURLs } = require("../src/utils");
+const {
+  septaExtract,
+  sayHello,
+  stations,
+  writeStations,
+  getURLs,
+  surburban
+} = require("../src/utils");
 
 describe("Testing Utils", () => {
-
   it("Hello test", () => {
     assert.equal(sayHello(), "hello");
   });
@@ -24,19 +29,21 @@ describe("Testing Utils", () => {
   });
 
   it("Test Stations", () => {
-      stations(data => {
-          writeStations("stations.csv",data)
-
-      })
-    
+    stations(data => {
+      writeStations("stations.csv", data);
+    });
   });
 
   it("Get URLs", () => {
-      getURLs("data/stations.csv",data => {
-        console.log(data)
-      });
+    getURLs("data/stations.csv", data => {
+      console.log(data);
+    });
+  });
 
-  
-});
+  it("Get URLs", () => {
+    surburban(data => {
+      assert.equal(data.north[0].direction,'N')
 
+    });
+  });
 });
