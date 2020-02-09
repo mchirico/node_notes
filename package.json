@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
-    "testw": "mocha -w"
+    "test": "nyc mocha",
+    "testw": "mocha -w",
+    "coverage": "nyc report --reporter=text-lcov |codecov --pipe -t ${CODECOV_TOKEN}"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,12 @@
   "homepage": "https://github.com/mchirico/node_notes#readme",
   "dependencies": {
     "csvtojson": "^2.0.10",
+    "nyc": "^15.0.0",
     "request": "^2.88.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "codecov": "^3.6.5",
     "mocha": "^7.0.1"
   }
 }

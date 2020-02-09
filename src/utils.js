@@ -21,6 +21,21 @@ const septaExtract = (data, callback) => {
   callback(station);
 };
 
+const surburban = callback => {
+    const url = "https://www3.septa.org/hackathon/Arrivals/Suburban%20Station/5/";
+    request({ url: url, json: true }, (error, response) => {
+      if (error) {
+        console.log("\n\n **** error *****\n");
+      }
+
+        septaExtract(response.body, data => {
+                callback(data);
+               });
+      });
+    };
+    
+  
+
 const stations = callback => {
   const url = "http://www3.septa.org/hackathon/Arrivals/station_id_name.csv";
   request({ url: url, json: false }, (error, response) => {
@@ -64,5 +79,6 @@ module.exports = {
   septaExtract: septaExtract,
   stations: stations,
   writeStations: writeStations,
-  getURLs: getURLs
+  getURLs: getURLs,
+  surburban: surburban,
 };
