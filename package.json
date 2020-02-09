@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "testw": "mocha -w"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/mchirico/node_notes#readme",
   "dependencies": {
+    "csvtojson": "^2.0.10",
     "request": "^2.88.0"
   },
   "devDependencies": {
