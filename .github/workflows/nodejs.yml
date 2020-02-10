@@ -27,7 +27,7 @@ jobs:
       env:
         CI: true
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        
+
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -39,5 +39,18 @@ jobs:
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-      
+
+    - run: |
+        make
+
+
+    # BigQuery
+    - name: Working with BigQuery
+      run: |
+       txt="node_notes..." 
+       bq query --nouse_legacy_sql 'CREATE TABLE IF NOT EXISTS  `pigdevonlyx.github.log` (msg string, timeEnter timestamp);'
+       bq query --nouse_legacy_sql  --parameter=MSG:STRING:"${txt}"  'insert into `pigdevonlyx.github.log` (msg,timeEnter) values (@MSG,CURRENT_TIMESTAMP())'
+
+
+
 
