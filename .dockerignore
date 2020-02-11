@@ -7,4 +7,6 @@ Makefile
 Notes
 *.md
 Dockerfile
-credentials/tracker-184b3-firebase.json
+credentials/*
+.idea/
+
