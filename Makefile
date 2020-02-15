@@ -1,9 +1,10 @@
+PROJECT = mchirico
 
 docker-build:
-	docker build --no-cache -t gcr.io/pigdevonlyx/nodenotes:test -f Dockerfile .
+	docker build --no-cache -t gcr.io/$(PROJECT)/nodenotes:test -f Dockerfile .
 
 push:
-	docker push gcr.io/pigdevonlyx/nodenotes:test 
+	docker push gcr.io/$(PROJECT)/nodenotes:test 
 
 run:
-	docker run --rm -it gcr.io/pigdevonlyx/nodenotes:test
+	docker run -p 3000:3000 --rm -it gcr.io/$(PROJECT)/nodenotes:test
