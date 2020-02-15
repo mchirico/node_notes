@@ -17,9 +17,16 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+
+    # Decrypt files..
     - run: openssl aes-256-cbc -k "${SUPER_SECRET_PASSWORD}" -pbkdf2 -md md5 -in credentials/tracker-184b3-firebase.json.enc -out credentials/tracker-184b3-firebase.json -d
       env:
         SUPER_SECRET_PASSWORD: ${{ secrets.SUPER_SECRET_PASSWORD }}
+
+    - run: openssl aes-256-cbc -k "${SUPER_SECRET_PASSWORD}" -pbkdf2 -md md5 -in credentials/mongodb.connect.url.js.enc -out credentials/mongodb.connect.url.js -d
+      env:
+        SUPER_SECRET_PASSWORD: ${{ secrets.SUPER_SECRET_PASSWORD }}
+
     - run: npm install
     - run: npm run build --if-present
     - run: npm test
