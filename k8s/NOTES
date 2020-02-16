@@ -1,0 +1,5 @@
+
+
+sudo minikube tunnel
+
+k expose deployment node-pod --type=LoadBalancer --name=node-service

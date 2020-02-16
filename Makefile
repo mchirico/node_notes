@@ -13,3 +13,6 @@ run:
 
 stop:
 	docker stop $(NAME)
+
+logs:
+	docker logs nodenotes
