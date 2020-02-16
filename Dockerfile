@@ -1,4 +1,4 @@
-FROM node
+FROM node:current-alpine
 RUN mkdir /workspace
 WORKDIR /workspace
 COPY . /workspace
