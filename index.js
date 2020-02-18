@@ -53,7 +53,7 @@ io.on("connection", socket => {
 });
 
 mongoose
-  .connect(swapUri(uri, "test", "node"), {
+  .connect(swapUri(uri, "test", "node_notes"), {
     useUnifiedTopology: true,
     useNewUrlParser: true
   })

@@ -4,8 +4,10 @@ metadata:
   name: node-pod
 spec:
   ports:
-  - port: 3000
+  - port: 80
+    targetPort: 3000
   selector:
     app: node-pod
+  type: LoadBalancer
 
 
