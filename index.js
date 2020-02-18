@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const { URI } = require("./credentials/mongodb.connect.url");
 const uri = URI();
 const { addThing } = require("./src/mongoose/mongoose.util");
+const { swapUri } = require("./src/swap.utils");
 
 const app = express();
 const server = http.createServer(app);
@@ -52,7 +53,10 @@ io.on("connection", socket => {
 });
 
 mongoose
-  .connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
+  .connect(swapUri(uri, "test", "node"), {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  })
   .then(result => {
     server.listen(port, () => {
       console.log(`🚀 Server is up: port ${port}`);

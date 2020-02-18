@@ -8,6 +8,9 @@ docker-build:
 push:
 	docker push gcr.io/$(PROJECT)/$(NAME):$(TAG) 
 
+pull:
+	docker pull gcr.io/$(PROJECT)/$(NAME):$(TAG) 
+
 run:
 	docker run -p 3000:3000 --rm -it -d --name $(NAME) gcr.io/$(PROJECT)/$(NAME):$(TAG) 
 
