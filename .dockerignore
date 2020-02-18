@@ -7,6 +7,6 @@ Makefile
 Notes
 *.md
 Dockerfile
-credentials/*
+credentials/*.enc
 .idea/
 k8s

@@ -4,6 +4,11 @@ const express = require("express");
 const graphqlHttp = require("express-graphql");
 const socketio = require("socket.io");
 
+const mongoose = require("mongoose");
+const { URI } = require("./credentials/mongodb.connect.url");
+const uri = URI();
+const { addThing } = require("./src/mongoose/mongoose.util");
+
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
@@ -24,7 +29,7 @@ app.get("/chat", function(req, res) {
 });
 
 app.get("/example/a", function(req, res) {
-  res.send("Hello from A!");
+  addThing(mongoose, req, res, "Works!");
 });
 
 app.use(
@@ -46,10 +51,17 @@ io.on("connection", socket => {
   });
 });
 
-server.listen(port, () => {
-  console.log(`Server is up: port ${port}`);
-  console.log(`Try: http://localhost:3000/example/a`);
-});
+mongoose
+  .connect(uri, { useUnifiedTopology: true, useNewUrlParser: true })
+  .then(result => {
+    server.listen(port, () => {
+      console.log(`🚀 Server is up: port ${port}`);
+      console.log(`Try: http://localhost:3000/example/a`);
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
 module.exports = {
   app: app,

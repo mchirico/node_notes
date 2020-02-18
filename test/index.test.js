@@ -9,7 +9,6 @@ const {
   surburban
 } = require("../src/utils");
 
-
 describe("Testing Utils", () => {
   it("Hello test", () => {
     assert.equal(sayHello(), "hello");
