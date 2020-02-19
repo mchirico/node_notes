@@ -14,9 +14,9 @@ describe("Testing Mongoose", () => {
       })
       .then(result => {
         console.log("connected... do further tests here..");
-        assert.isTrue(true,1)
+        assert.isTrue(true, 1);
         done();
-        mongoose.disconnect()
+        mongoose.disconnect();
       })
       .catch(err => {
         console.log(err);
