@@ -2,6 +2,14 @@
 [![codecov](https://codecov.io/gh/mchirico/node_notes/branch/master/graph/badge.svg)](https://codecov.io/gh/mchirico/node_notes)
 # node_notes
 
+You will need certs
+```
+make
+
+
+``
+
+
 # For quick start of your own project
 ```
 npm init # take all defaults
