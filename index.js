@@ -61,7 +61,7 @@ mongoose
   .then(result => {
     server.listen(port, () => {
       console.log(`🚀 Server is up: port ${port}`);
-      console.log(`Try: http://localhost:3000/example/a`);
+      console.log(`Try: http://localhost:${port}/example/a`);
     });
   })
   .catch(err => {

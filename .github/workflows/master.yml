@@ -1,0 +1,63 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    # Decrypt files..
+    - run: openssl aes-256-cbc -k "${SUPER_SECRET_PASSWORD}" -pbkdf2 -md md5 -in credentials/tracker-184b3-firebase.json.enc -out credentials/tracker-184b3-firebase.json -d
+      env:
+        SUPER_SECRET_PASSWORD: ${{ secrets.SUPER_SECRET_PASSWORD }}
+
+    - run: openssl aes-256-cbc -k "${SUPER_SECRET_PASSWORD}" -pbkdf2 -md md5 -in credentials/mongodb.connect.url.js.enc -out credentials/mongodb.connect.url.js -d
+      env:
+        SUPER_SECRET_PASSWORD: ${{ secrets.SUPER_SECRET_PASSWORD }}
+
+    - run: npm install
+    - run: npm run build --if-present
+    - run: npm test
+    - run: npm run coverage
+      env:
+        CI: true
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_key: ${{ secrets.GKE_KEY }}
+
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: |
+        # Set up docker to authenticate
+        # via gcloud command-line tool.
+        gcloud auth configure-docker
+
+    - run: |
+        export PORT=8080
+        echo "https://cloud.aipiggybot.io"
+        gcloud builds submit --tag gcr.io/pigdevonlyx/nodecloud
+        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud --platform managed --allow-unauthenticated
+
+
+
+
+
+

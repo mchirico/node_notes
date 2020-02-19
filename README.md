@@ -6,8 +6,20 @@ You will need certs
 ```
 make
 
+```
 
-``
+# Cloud Run
+```
+
+export PORT=8080
+gcloud config set gcloudignore/enabled false
+gcloud builds submit --tag gcr.io/mchirico/spud
+gcloud run deploy --image gcr.io/mchirico/spud  --platform managed
+gcloud run deploy spud --image gcr.io/mchirico/spud --platform managed --allow-unauthenticated
+
+https://cloud.cwxstat.io
+
+```
 
 
 # For quick start of your own project
