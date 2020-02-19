@@ -7,7 +7,7 @@ const socketio = require("socket.io");
 const mongoose = require("mongoose");
 const { URI } = require("./credentials/mongodb.connect.url");
 const uri = URI();
-const { addThing } = require("./src/mongoose/mongoose.util");
+const { AddTank } = require("./src/mongoose/mongoose.util");
 const { swapUri } = require("./src/swap.utils");
 
 const app = express();
@@ -29,8 +29,9 @@ app.get("/chat", function(req, res) {
   res.sendFile(chatIndex);
 });
 
+const addTank = new AddTank(mongoose);
 app.get("/example/a", function(req, res) {
-  addThing(mongoose, req, res, "Works!");
+  addTank.addThing(req, res, "Works!");
 });
 
 app.use(

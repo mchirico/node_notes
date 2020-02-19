@@ -49,6 +49,11 @@ jobs:
 
     - run: |
         make
+        make run
+        sleep 3
+        make logs
+        curl http://localhost:3000/example/a
+        curl http://localhost:3000/example/a
 
 
     # BigQuery
