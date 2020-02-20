@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Master
 
 on:
   push:
@@ -42,21 +42,27 @@ jobs:
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
         version: '270.0.0'
-        service_account_key: ${{ secrets.GKE_KEY }}
+        service_account_key: ${{ secrets.OWNER }}
 
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: |
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
+        gcloud components update --quiet
 
     - run: |
-        export PORT=8080
-        echo "https://cloud.aipiggybot.io"
-        gcloud builds submit --tag gcr.io/pigdevonlyx/nodecloud
-        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud --platform managed --allow-unauthenticated
+        gcloud config set gcloudignore/enabled false --project pigdevonlyx
+        gcloud builds submit --tag gcr.io/pigdevonlyx/nodecloud --project pigdevonlyx
+        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud --platform managed --allow-unauthenticated --project pigdevonlyx --region us-east1 --port 3000
 
 
+    # BigQuery
+    - name: Working with BigQuery
+      run: |
+       txt="master push " 
+       bq query --nouse_legacy_sql 'CREATE TABLE IF NOT EXISTS  `pigdevonlyx.github.log` (msg string, timeEnter timestamp);'
+       bq query --nouse_legacy_sql  --parameter=MSG:STRING:"${txt}"  'insert into `pigdevonlyx.github.log` (msg,timeEnter) values (@MSG,CURRENT_TIMESTAMP())'
 
 
 

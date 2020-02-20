@@ -4,7 +4,8 @@
 
 You will need certs
 ```
-make
+cat my-key.json | base64
+
 
 ```
 
@@ -18,6 +19,17 @@ gcloud run deploy --image gcr.io/mchirico/spud  --platform managed
 gcloud run deploy spud --image gcr.io/mchirico/spud --platform managed --allow-unauthenticated
 
 https://cloud.cwxstat.io
+
+or...
+
+https://cloud.aipiggybot.io/
+
+        export PORT=8080
+        gcloud config set project pigdevonlyx
+        echo "https://cloud.aipiggybot.io"
+        gcloud builds submit --tag gcr.io/pigdevonlyx/nodecloud
+        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud --platform managed --allow-unauthenticated
+
 
 ```
 
