@@ -1,0 +1,7 @@
+commonLabels:
+  app: node-pod
+  name: node-pod
+  image: gcr.io/mchirico/nodenotes:test
+resources:
+-  pod.yaml
+-  service.yaml

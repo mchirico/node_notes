@@ -1,3 +1,36 @@
+
+class PlayGround {
+  constructor(mongoose) {
+    const schema = new mongoose.Schema({
+      name: "string",
+      data: "string",
+      size: "string",
+      ip: "string",
+      date: "string"
+    });
+    this.Tank = mongoose.model("Tank", schema);
+    this.mongoose = mongoose
+  }
+
+  addThing = (data,B) => {
+
+    var date = new Date();
+
+    var small = new this.Tank({ data: data, date: date });
+
+    small.save(function(err) {
+      if (err) {
+        B();
+        console.log('III error',err)
+      } else {
+        B();
+      }
+    });
+
+  };
+}
+
+
 class AddTank {
   constructor(mongoose) {
     const schema = new mongoose.Schema({
@@ -26,5 +59,6 @@ class AddTank {
 }
 
 module.exports = {
-  AddTank: AddTank
+  AddTank: AddTank,
+  PlayGround: PlayGround
 };
