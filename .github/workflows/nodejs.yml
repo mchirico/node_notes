@@ -50,7 +50,7 @@ jobs:
     - run: |
         make
         make run
-        sleep 3
+        sleep 8
         make logs
         curl http://localhost:3000/example/a
         curl http://localhost:3000/example/a
