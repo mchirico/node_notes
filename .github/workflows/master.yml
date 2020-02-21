@@ -3,7 +3,7 @@ name: Master
 on:
   push:
     branches:
-      - master
+      - n
 
 jobs:
   build:
@@ -41,7 +41,7 @@ jobs:
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-        version: '270.0.0'
+        version: 'latest'
         service_account_key: ${{ secrets.OWNER }}
 
     # Angular project ... you choose
@@ -61,7 +61,7 @@ jobs:
         # Set up docker to authenticate
         # via gcloud command-line tool.
         gcloud auth configure-docker
-        gcloud components update --quiet
+
 
     - run: |
         gcloud config set gcloudignore/enabled false --project pigdevonlyx
