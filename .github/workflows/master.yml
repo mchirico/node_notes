@@ -66,7 +66,9 @@ jobs:
     - run: |
         gcloud config set gcloudignore/enabled false --project pigdevonlyx
         gcloud builds submit --tag gcr.io/pigdevonlyx/nodecloud --project pigdevonlyx --timeout 35m23s
-        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud --platform managed --allow-unauthenticated --project pigdevonlyx --region us-east1 --port 3000
+        gcloud run deploy nodecloud --image gcr.io/pigdevonlyx/nodecloud \
+              --platform managed --allow-unauthenticated --project pigdevonlyx \
+              --region us-east1 --port 3000 --max-instances 3  --memory 128Mi
 
 
     # BigQuery
