@@ -8,6 +8,8 @@ Live version [cloud.aipiggybot.io](https://cloud.aipiggybot.io/)
 If you are building a new project off of this, you'll need Firebase and Google
 credentials.  
 
+Example of how to create [service key](https://player.vimeo.com/video/392951251)
+
 ```
 # command to create Github secret
 cat GoogleServiceKey.json | base64
