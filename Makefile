@@ -7,8 +7,6 @@ docker-build:
 ifeq ($(PORT), 8080)
 	echo "build for port.."
 	docker build --no-cache -t gcr.io/$(PROJECT)/$(NAME):$(PORT) -f Dockerfile .
-#	gcloud config set gcloudignore/enabled false
-#	gcloud builds submit --tag gcr.io/$(PROJECT)/$(NAME):$(PORT)
 else
 	docker build --no-cache -t gcr.io/$(PROJECT)/$(NAME):$(TAG) -f Dockerfile .
 endif
