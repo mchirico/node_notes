@@ -25,7 +25,9 @@ const TesterMongoose = (data, ResultCmd) => {
 
 describe("Testing Mongoose", () => {
   it("A better test", function(done) {
-    done.timeout = 7000;
+    this.timeout(7000);
+    setTimeout(done, 7000);
+
     TesterMongoose("Some Data to pass...", () => {
       const playGround = new PlayGround(mongoose);
       playGround.addThing("WOW!... Testing simple mongoose connect", () => {
@@ -40,7 +42,9 @@ describe("Testing Mongoose", () => {
   });
 
   it("See if it runs a 2nd time...", function(done) {
-    done.timeout = 7000;
+    this.timeout(7000);
+    setTimeout(done, 7000);
+
     TesterMongoose("Some Data to pass...", () => {
       const playGround = new PlayGround(mongoose);
       playGround.addThing("WOW!... Testing simple mongoose connect", () => {

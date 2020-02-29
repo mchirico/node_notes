@@ -42,6 +42,10 @@ app.use(
   })
 );
 
+app.get('*',function (req, res) {
+  res.redirect('/');
+});
+
 let count = 0;
 io.on("connection", socket => {
   console.log(`New WebSocket`);

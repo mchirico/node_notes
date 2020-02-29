@@ -51,7 +51,7 @@ jobs:
         cd angular
         npm install
         rm -rf ../dist
-        yes no|./node_modules/.bin/ng build --outputPath=../dist --prod
+        yes no|./node_modules/.bin/ng build --outputPath=../dist --prod  --outputHashing=all
         cd ../
         rm -rf angular
 
